@@ -14,6 +14,7 @@ const PhotoList = (props) => {
           title={photo.title}
         />
     )
+
     return(
       <div>
         <h2>{props.title}</h2>

@@ -1,11 +1,12 @@
 import React, { Component} from 'react';
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import apiKey from './config'
-import SearchForm from './Components/SearchForm'
-import PhotoList from './Components/PhotoList'
-import Nav from './Components/Nav'
-import NotFound from './Components/NotFound'
+import apiKey from './config';
+import SearchForm from './Components/SearchForm';
+import PhotoList from './Components/PhotoList';
+import Nav from './Components/Nav';
+import QuerySearch from './Components/QuerySearch';
+import NotFound from './Components/NotFound';
 
 
 
@@ -24,7 +25,7 @@ class App extends Component {
         };
     }
 
-     performSearch = (query = 'puppy') => {
+     performSearch = (query) => {
         fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&safe_search=1&format=json&nojsoncallback=1`)
          .then(results => results.json())
          .then(resultsData => {this.setState({
@@ -67,17 +68,15 @@ class App extends Component {
                 <div className="photo-container">
                     {(this.state.isLoading)?<h2>Loading...</h2> : 
                         (<Switch>
-                                <Route exact path="/" render={()=> <PhotoList data={this.state.photos} title={this.state.tags}/>} />
+                                <Route exact path="/" render={()=> <PhotoList data={this.state.puppyPhotos} title={this.state.tags}/>} />
                                 <Route exact path="/puppies" render={()=> <PhotoList data={this.state.puppyPhotos} title="Puppies"/>} />
                                 <Route exact path="/forests" render={()=> <PhotoList data={this.state.forestPhotos} title="Forests"/>} />
                                 <Route exact path="/flowers" render={()=> <PhotoList data={this.state.flowerPhotos} title="Flowers"/>} />
-                                <Route path="/search/:query" render={()=> <PhotoList data={this.state.photos} title={this.state.tags}/>} />
+                                <Route path="/search/:query" render={()=> <QuerySearch data={this.state.photos} title={this.state.tags} handleSearch={this.performSearch} loading={this.state.isLoading}/>} />
                                 <Route component={NotFound} />
                         </Switch>)
                     }
-                </div>
-                
-                
+                </div>   
             </div>
         </BrowserRouter>
         )
