@@ -6,7 +6,7 @@ import SearchForm from './Components/SearchForm';
 import PhotoList from './Components/PhotoList';
 import Nav from './Components/Nav';
 import QuerySearch from './Components/QuerySearch';
-import NotFound from './Components/NotFound';
+import NoPage from './Components/NoPage';
 
 
 
@@ -73,7 +73,7 @@ class App extends Component {
                                 <Route exact path="/forests" render={()=> <PhotoList data={this.state.forestPhotos} title="Forests"/>} />
                                 <Route exact path="/flowers" render={()=> <PhotoList data={this.state.flowerPhotos} title="Flowers"/>} />
                                 <Route path="/search/:query" render={()=> <QuerySearch data={this.state.photos} title={this.state.tags} handleSearch={this.performSearch} loading={this.state.isLoading}/>} />
-                                <Route component={NotFound} />
+                                <Route component={NoPage} />
                         </Switch>)
                     }
                 </div>   

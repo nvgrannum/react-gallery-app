@@ -2,8 +2,11 @@ import React from 'react'
 
 const NotFound = () => {
     return(
-        <h3 className="not-found">Uh oh. No results here. Try another search!</h3>
-    )
+        <div>
+        <h2 className="not-found">No results found!</h2>
+        <h3 className="not-found">Nothing to see here. Try another search or clicking on an available category!</h3>
+        </div>
+   )
 }
 
 export default NotFound
