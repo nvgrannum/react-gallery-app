@@ -28,7 +28,7 @@ const QuerySearch = (props) => {
         <div>
         <h2>{props.title}</h2>
         <ul>
-            {pics.length>0 && props.loading===false? 
+            {pics.length>0 ? 
                 pics: 
                 <NotFound /> }
         </ul>

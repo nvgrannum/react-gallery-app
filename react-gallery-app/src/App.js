@@ -36,7 +36,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.performSearch();
+        this.performSearch('puppies');
 
         fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=puppy&per_page=24&safe_search=1&format=json&nojsoncallback=1`)
             .then(results => results.json())
@@ -57,8 +57,6 @@ class App extends Component {
     }
     
    
-
-//push search to end of history
     render() {
         return(
         <BrowserRouter>
@@ -68,11 +66,11 @@ class App extends Component {
                 <div className="photo-container">
                     {(this.state.isLoading)?<h2>Loading...</h2> : 
                         (<Switch>
-                                <Route exact path="/" render={()=> <PhotoList data={this.state.puppyPhotos} title={this.state.tags}/>} />
+                                <Route exact path="/" render={()=> <PhotoList data={this.state.photos} title={this.state.tags}/>} />
                                 <Route exact path="/puppies" render={()=> <PhotoList data={this.state.puppyPhotos} title="Puppies"/>} />
                                 <Route exact path="/forests" render={()=> <PhotoList data={this.state.forestPhotos} title="Forests"/>} />
                                 <Route exact path="/flowers" render={()=> <PhotoList data={this.state.flowerPhotos} title="Flowers"/>} />
-                                <Route path="/search/:query" render={()=> <QuerySearch data={this.state.photos} title={this.state.tags} handleSearch={this.performSearch} loading={this.state.isLoading}/>} />
+                                <Route path="/search/:query" render={()=> <QuerySearch data={this.state.photos} title={this.state.tags} handleSearch={this.performSearch}/>} />
                                 <Route component={NoPage} />
                         </Switch>)
                     }
