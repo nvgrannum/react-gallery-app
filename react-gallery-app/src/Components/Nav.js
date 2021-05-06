@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {NavLink, Route, BrowserRouter} from 'react-router-dom'
+import {NavLink, Route, BrowserRouter, Switch} from 'react-router-dom'
 //import NotFound from './NotFound'
 
 
@@ -9,15 +9,13 @@ class Nav extends Component {
     render() {
         
         return(
-        <BrowserRouter>
-        <nav class="main-nav">
+        <nav className="main-nav">
             <ul>
-            <li><a href='#'>Cats</a></li>
-            <li><a href='#'>Dogs</a></li>
-            <li><a href='#'>Computers</a></li>
+                <li><NavLink to='/flowers'>Flowers</NavLink></li>
+                <li><NavLink to='/puppies'>Puppies</NavLink></li>
+                <li><NavLink to='/forests'>Forests</NavLink></li>
             </ul>
         </nav>
-        </BrowserRouter>
         )
     }
 }

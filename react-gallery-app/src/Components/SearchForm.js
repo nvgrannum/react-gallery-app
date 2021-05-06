@@ -1,12 +1,28 @@
 import React,{Component} from 'react'
 
 class SearchForm extends Component{
+    
+    state={
+        query: ''
+    }
+    
+    getPhotos = (e) => {
+       this.setState({query: e.target.value}) 
+    }    
+    
+    searchFlickr = (e) => {
+        e.preventDefault();
+        this.props.onSearch(this.state.query);
+        e.currentTarget.reset();
+    }
+
     render() {
         return(
-        <form className="search-form">
+        <form className="search-form" onSubmit={this.searchFlickr}>
             <input type="search" 
                 name="search" 
                 placeholder="Search" 
+                onChange={this.getPhotos}
                 required/>
             <button type="submit" class="search-button">
             <svg fill="#fff" height="24" viewBox="0 0 23 23" width="24" xmlns="http://www.w3.org/2000/svg">

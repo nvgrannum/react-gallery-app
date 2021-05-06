@@ -1,10 +1,9 @@
 import React from 'react';
 
 const Photo = (props) => {
-    console.log(props.data);
     return(
     <li>
-        <img src={`https://www.flickr.com/photos/${props.data}/${props.id}/in/photostream`} alt={`Photo titled ${props.title}`}/>
+        <img src={`https://farm${props.farm}.staticflickr.com/${props.server}/${props.id}_${props.secret}.jpg`} alt={`Photo titled ${props.title}`}/>
     </li>
     )
 }

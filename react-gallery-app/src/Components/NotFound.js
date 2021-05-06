@@ -1,7 +1,9 @@
 import React from 'react'
 
 const NotFound = () => {
-    return(console.log('Uh oh. Page not found. Try again!'))
+    return(
+        <h3>Uh oh. Page not found. Try again!</h3>
+    )
 }
 
 export default NotFound

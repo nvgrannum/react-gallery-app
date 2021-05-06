@@ -5,16 +5,22 @@ const PhotoList = (props) => {
     
     let photos = props.data.map(photo=> 
         <Photo 
-          data={photo.owner}
+          owner={props.owner}
+          farm={photo.farm}
+          server={photo.server}
+          secret={photo.secret}
           id={photo.id}
           key={photo.id}
           title={photo.title}
         />
     )
     return(
-      <ul>
-        {photos}
-      </ul>
+      <div>
+        <h2>{props.title}</h2>
+        <ul>
+          {photos}
+        </ul>
+      </div>
     )
   }
 
