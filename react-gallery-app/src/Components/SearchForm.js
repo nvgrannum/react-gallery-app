@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import {withRouter} from 'react-router-dom'
 
 class SearchForm extends Component{
     
@@ -6,7 +7,7 @@ class SearchForm extends Component{
         query: ''
     }
     
-    getPhotos = (e) => {
+    setQuery = (e) => {
        this.setState({query: e.target.value}) 
     }    
     
@@ -14,7 +15,7 @@ class SearchForm extends Component{
         e.preventDefault();
         this.props.onSearch(this.state.query);
         let path=`/search/${this.state.query}`;
-        //this.props.history.push(path);
+        this.props.history.push(path);
         e.currentTarget.reset();
     }
 
@@ -24,7 +25,7 @@ class SearchForm extends Component{
             <input type="search" 
                 name="search" 
                 placeholder="Search" 
-                onChange={this.getPhotos}
+                onChange={this.setQuery}
                 required/>
             <button type="submit" class="search-button">
             <svg fill="#fff" height="24" viewBox="0 0 23 23" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -37,4 +38,4 @@ class SearchForm extends Component{
     }
 }
 
-export default SearchForm
+export default withRouter(SearchForm)

@@ -24,7 +24,7 @@ class App extends Component {
         };
     }
 
-     performSearch = (query) => {
+     performSearch = (query = 'puppy') => {
         fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&safe_search=1&format=json&nojsoncallback=1`)
          .then(results => results.json())
          .then(resultsData => {this.setState({
@@ -35,13 +35,12 @@ class App extends Component {
     }
 
     componentDidMount() {
+        this.performSearch();
 
         fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=puppy&per_page=24&safe_search=1&format=json&nojsoncallback=1`)
             .then(results => results.json())
             .then(resultsData => {this.setState({
-                puppyPhotos:resultsData.photos.photo, 
-                photos: resultsData.photos.photo, 
-                tags:'Puppies',
+                puppyPhotos:resultsData.photos.photo,  
                 isLoading: false})})
             .catch(error=> console.log('error fetching data', error));
 
@@ -69,9 +68,9 @@ class App extends Component {
                     {(this.state.isLoading)?<h2>Loading...</h2> : 
                         (<Switch>
                                 <Route exact path="/" render={()=> <PhotoList data={this.state.photos} title={this.state.tags}/>} />
-                                <Route path="/puppies" render={()=> <PhotoList data={this.state.puppyPhotos} title="Puppies"/>} />
-                                <Route path="/forests" render={()=> <PhotoList data={this.state.forestPhotos} title="Forests"/>} />
-                                <Route path="/flowers" render={()=> <PhotoList data={this.state.flowerPhotos} title="Flowers"/>} />
+                                <Route exact path="/puppies" render={()=> <PhotoList data={this.state.puppyPhotos} title="Puppies"/>} />
+                                <Route exact path="/forests" render={()=> <PhotoList data={this.state.forestPhotos} title="Forests"/>} />
+                                <Route exact path="/flowers" render={()=> <PhotoList data={this.state.flowerPhotos} title="Flowers"/>} />
                                 <Route path="/search/:query" render={()=> <PhotoList data={this.state.photos} title={this.state.tags}/>} />
                                 <Route component={NotFound} />
                         </Switch>)
