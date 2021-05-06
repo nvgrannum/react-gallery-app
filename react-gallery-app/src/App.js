@@ -69,9 +69,9 @@ class App extends Component {
                     {(this.state.isLoading)?<h2>Loading...</h2> : 
                         (<Switch>
                                 <Route exact path="/" render={()=> <PhotoList data={this.state.photos} title={this.state.tags}/>} />
-                                <Route exact path="/puppies" render={()=> <PhotoList data={this.state.puppyPhotos} title="Puppies"/>} />
-                                <Route exact path="/forests" render={()=> <PhotoList data={this.state.forestPhotos} title="Forests"/>} />
-                                <Route exact path="/flowers" render={()=> <PhotoList data={this.state.flowerPhotos} title="Flowers"/>} />
+                                <Route path="/puppies" render={()=> <PhotoList data={this.state.puppyPhotos} title="Puppies"/>} />
+                                <Route path="/forests" render={()=> <PhotoList data={this.state.forestPhotos} title="Forests"/>} />
+                                <Route path="/flowers" render={()=> <PhotoList data={this.state.flowerPhotos} title="Flowers"/>} />
                                 <Route path="/search/:query" render={()=> <PhotoList data={this.state.photos} title={this.state.tags}/>} />
                                 <Route component={NotFound} />
                         </Switch>)

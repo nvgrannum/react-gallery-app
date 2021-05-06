@@ -13,7 +13,7 @@ class SearchForm extends Component{
     searchFlickr = (e) => {
         e.preventDefault();
         this.props.onSearch(this.state.query);
-        //let path=`/search/${this.state.query}`;
+        let path=`/search/${this.state.query}`;
         //this.props.history.push(path);
         e.currentTarget.reset();
     }
