@@ -19,14 +19,18 @@ class App extends Component {
         flowerPhotos:[],
         photos:[],
         title: '',
-        query:''
+        tags:'',
+        isLoading: true
         };
     }
 
      performSearch = (query) => {
         fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&safe_search=1&format=json&nojsoncallback=1`)
          .then(results => results.json())
-         .then(resultsData => {this.setState({photos:resultsData.photos.photo, query: query})})
+         .then(resultsData => {this.setState({
+             photos:resultsData.photos.photo, 
+             tags: query,
+             isLoading:false})})
          .catch(error=> console.log('error fetching data', error))
     }
 
@@ -37,23 +41,24 @@ class App extends Component {
             .then(resultsData => {this.setState({
                 puppyPhotos:resultsData.photos.photo, 
                 photos: resultsData.photos.photo, 
-                query:'Puppies'})})
+                tags:'Puppies',
+                isLoading: false})})
             .catch(error=> console.log('error fetching data', error));
 
         fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=forest&per_page=24&safe_search=1&format=json&nojsoncallback=1`)
             .then(results => results.json())
-            .then(resultsData => {this.setState({forestPhotos:resultsData.photos.photo})})
+            .then(resultsData => {this.setState({forestPhotos:resultsData.photos.photo, isLoading: false})})
             .catch(error=> console.log('error fetching data', error));
 
         fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=flower&per_page=24&safe_search=1&format=json&nojsoncallback=1`)
             .then(results => results.json())
-            .then(resultsData => {this.setState({flowerPhotos:resultsData.photos.photo})})
+            .then(resultsData => {this.setState({flowerPhotos:resultsData.photos.photo, isLoading:false})})
             .catch(error=> console.log('error fetching data', error));    
     }
     
    
-//default query instead of redirecting page
-//history method. push search to end of history
+
+//push search to end of history
     render() {
         return(
         <BrowserRouter>
@@ -61,16 +66,16 @@ class App extends Component {
                 <SearchForm onSearch={this.performSearch}/>
                 <Nav />
                 <div className="photo-container">
-                  
-                   <Switch>
-                        <Route exact path="/" render={()=> <PhotoList data={this.state.photos} title={this.state.query}/>} />
-                        <Route exact path="/puppies" render={()=> <PhotoList data={this.state.puppyPhotos} title="Puppies"/>} />
-                        <Route exact path="/forests" render={()=> <PhotoList data={this.state.forestPhotos} title="Forests"/>} />
-                        <Route exact path="/flowers" render={()=> <PhotoList data={this.state.flowerPhotos} title="Flowers"/>} />
-                        <Route path="/search/:query" render={()=> <PhotoList data={this.state.photos} title={this.state.query}/>} />
-                        <Route component={NotFound} />
-                   </Switch>
-                   
+                    {(this.state.isLoading)?<h2>Loading...</h2> : 
+                        (<Switch>
+                                <Route exact path="/" render={()=> <PhotoList data={this.state.photos} title={this.state.tags}/>} />
+                                <Route exact path="/puppies" render={()=> <PhotoList data={this.state.puppyPhotos} title="Puppies"/>} />
+                                <Route exact path="/forests" render={()=> <PhotoList data={this.state.forestPhotos} title="Forests"/>} />
+                                <Route exact path="/flowers" render={()=> <PhotoList data={this.state.flowerPhotos} title="Flowers"/>} />
+                                <Route path="/search/:query" render={()=> <PhotoList data={this.state.photos} title={this.state.tags}/>} />
+                                <Route component={NotFound} />
+                        </Switch>)
+                    }
                 </div>
                 
                 
