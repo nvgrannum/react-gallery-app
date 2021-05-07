@@ -74,7 +74,7 @@ class App extends Component {
                                 <Route exact path="/puppies" render={()=> <PhotoList data={this.state.puppyPhotos} title="Puppies"/>} />
                                 <Route exact path="/forests" render={()=> <PhotoList data={this.state.forestPhotos} title="Forests"/>} />
                                 <Route exact path="/flowers" render={()=> <PhotoList data={this.state.flowerPhotos} title="Flowers"/>} />
-                                <Route path="/search/:query" render={()=> <QuerySearch data={this.state.photos} title={this.state.tags} handleSearch={this.performSearch}/>} />
+                                <Route path="/search/:query" render={()=> <QuerySearch data={this.state.photos} title={this.state.tags} handleSearch={this.performSearch}/>} loading={this.state.isLoading =true}/>
                                 <Route component={NoPage} />
                         </Switch>)
                     }
