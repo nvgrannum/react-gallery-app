@@ -31,8 +31,12 @@ class App extends Component {
         };
     }
     //same search from componentDidMount, but used when the searchForm is called to update a generic photos array with new data
-     performSearch = (query) => {
-        this.setState({isLoading:true})
+    loadingState = (query) => {
+        this.setState({isLoading:true});
+        this.performSearch(query)
+    }
+    
+    performSearch = (query) => {
         fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&safe_search=1&format=json&nojsoncallback=1`)
          .then(results => results.json())
          .then(resultsData => {this.setState({
@@ -84,7 +88,7 @@ class App extends Component {
                                 <Route exact path="/puppies" render={()=> <PhotoList data={this.state.puppyPhotos} title="Puppies"/>} />
                                 <Route exact path="/forests" render={()=> <PhotoList data={this.state.forestPhotos} title="Forests"/>} />
                                 <Route exact path="/flowers" render={()=> <PhotoList data={this.state.flowerPhotos} title="Flowers"/>} />
-                                <Route path="/search/:query" render={()=> <QuerySearch data={this.state.photos} title={this.state.tags} handleSearch={this.performSearch}/>} loading={this.state.isLoading}/>
+                                <Route path="/search/:query" render={()=> <QuerySearch data={this.state.photos} title={this.state.tags} handleSearch={this.loadingState} loading={this.state.isLoading}/> } />
                                 <Route component={NoPage} />
                         </Switch>)
                     }
