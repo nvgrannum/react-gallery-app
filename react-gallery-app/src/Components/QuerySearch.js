@@ -6,10 +6,10 @@ import NotFound from './NotFound'
 //Component used to take the url path and run a search based on the query
 //if the query is not the same as the existing one, it will run a fresh search and fetch new data
 const QuerySearch = (props) => {
-    let searchTerm = props.match.params.query;
-    if (props.title !== searchTerm) {
-        props.handleSearch(searchTerm)
-    }
+    // let searchTerm = props.match.params.query;
+    // if (props.title !== searchTerm) {
+    //     props.handleSearch(searchTerm)
+    // }
 
     let pics = props.data.map(photo=> 
         <Photo 
