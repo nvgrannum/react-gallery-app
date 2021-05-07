@@ -22,16 +22,24 @@ const QuerySearch = (props) => {
           title={photo.title}
         />
     )
-
+/*
+// if pics.length, return { pics }
+// else if props.isLoading, return <p>Loading...<p>
+// else return <NotFound>
+*/
 //Returns the search term as the title and any pictures that are fetched    
 //if there are no photos to display, the NotFound component is called
     return(
         <div>
         <h2>{props.title}</h2>
         <ul>
-            {pics.length>0 ? 
-                pics: 
-                <NotFound /> }
+            {pics.length ? 
+                pics : 
+                [props.loading? 
+                    <p>Loading...</p> : 
+                    <NotFound />]
+                
+            }
         </ul>
       </div>
     )
