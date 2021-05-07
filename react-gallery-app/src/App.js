@@ -32,7 +32,7 @@ class App extends Component {
     }
     //same search from componentDidMount, but used when the searchForm is called to update a generic photos array with new data
 
-    
+
     performSearch = (query) => {
         this.setState({isLoading:true});
         fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&safe_search=1&format=json&nojsoncallback=1`)

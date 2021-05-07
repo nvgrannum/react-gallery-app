@@ -2,7 +2,7 @@ import React from 'react'
 import Photo from './Photo'
 
 const PhotoList = (props) => {
-    
+
     let photos = props.data.map(photo=> 
         <Photo 
           owner={props.owner}
