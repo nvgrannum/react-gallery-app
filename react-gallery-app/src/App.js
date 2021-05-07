@@ -47,12 +47,16 @@ class App extends Component {
 
         fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=forest&per_page=24&safe_search=1&format=json&nojsoncallback=1`)
             .then(results => results.json())
-            .then(resultsData => {this.setState({forestPhotos:resultsData.photos.photo, isLoading: false})})
+            .then(resultsData => {this.setState({
+                forestPhotos:resultsData.photos.photo, 
+                isLoading: false})})
             .catch(error=> console.log('error fetching data', error));
 
         fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=flower&per_page=24&safe_search=1&format=json&nojsoncallback=1`)
             .then(results => results.json())
-            .then(resultsData => {this.setState({flowerPhotos:resultsData.photos.photo, isLoading:false})})
+            .then(resultsData => {this.setState({
+                flowerPhotos:resultsData.photos.photo, 
+                isLoading:false})})
             .catch(error=> console.log('error fetching data', error));    
     }
     
